@@ -1,3 +1,4 @@
+//var-section
 let questions = [
   {
     question: "Commonly used data types DO NOT include:",
@@ -28,12 +29,20 @@ let questionContainerElement =document.getElementById ("question-container")
 let questionElement =document.getElementById("question")
 let optionListElement=document.getElementById("option-list")
 let currentQuestionIndex, shuffledQuestions
+let timerElement = document.querySelector("#timer");
+let questionResultElement = document.querySelector("#question-result");
+let time = 20;
+let intervalId;
 
+//event-section
 startButton.addEventListener('click',startQuiz)
+nextButton.addEventListener("click", () => {
+  currentQuestionIndex++
+  setNextQuestion()
+})
 
-
+//function-section
 function startQuiz() {
-  console.log("started")
   startButton.classList.add("hide")
   shuffledQuestions=questions.sort(() => Math.random() - .5)
   currentQuestionIndex = 0
@@ -48,33 +57,41 @@ function setNextQuestion(){
 
 function showQuestion(questions){
   questionElement.innerText = questions.question
-  questions.answer.forEach(answer =>{
-    let button = docuemt.createElement("button")
-    button.innerText = answer.text
+  questions.choices.forEach(choices =>{
+    let button = document.createElement("button")
+    button.innerText = choices.text
     button.classList.add("btn")
-    if(answer.correct){
-      button.dataset.correct =answer.correct
+    if(choices.answer){
+      button.dataset.answer =choices.answer
     }
-    button.addEvent.Listener("click", selectAnswer)
-    answerButtonsElement.appendChild(button)
+    button.addEventListener("click", selectAnswer)
+    optionListElement.appendChild(button)
   })
 }
 
 function resetState() {
+  clearStatusClass(document.body)
   nextButton.classList.add("hide")
   while (optionListElement.firstChild) {
     optionListElement.removeChild
     (optionListElement.firstChild)
   }
 }
-
+;
 function selectAnswer(e) {
   let selectedButton =e.target
-  let correct= selectedButton.dataset.correct;
+  let correct= selectedButton.dataset.answer;
   setStatusClass(document.body, correct)
-  Array.from(answerButtonsElement.children).forEach(button => {
+  Array.from(optionListElement.children).forEach(button => {
     setStatusClass(button, button.dataset.correct)
   })
+  if (shuffledQuestions.length > currentQuestionIndex +1) {
+    nextButton.classList.remove("hide")
+  }else {
+    startButton.innerText = "Restart"
+    startButton.classList.remove("hide")
+  }
+  
 }
 
 function setStatusClass (element, correct) {
@@ -94,53 +111,12 @@ function clearStatusClass(element) {
 
 
 
-/* 
-  var questionEl = document.querySelector("#question");
-  var optionListEl = document.querySelector("#option-list");
-  var questionResultEl = document.querySelector("#question-result");
-  var timerEl = document.querySelector("#timer");
-  var playButton=document.querySelector("#play-button");
-
-  var questionIndex = 0;
-  var correctCount = 0;
-
-
-
-  playButton.addEventListener("click",startQuiz);
-
 
  
-  function startQuiz() {
-    console.log("Started");
-
-  }
- */ 
 /*
 
-var questions = [
-  {
-    question: "Commonly used data types DO NOT include:",
-    choices: ["strings", "booleans", "alerts", "numbers"],
-    answer: "alerts",
-  },
-  {
-    question:
-      "The condition in an if / else statement is enclosed within ____.",
-    choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
-    answer: "parentheses",
-  },
-];
 
-var questionEl = document.querySelector("#question");
-var optionListEl = document.querySelector("#option-list");
-var questionResultEl = document.querySelector("#question-result");
-var timerEl = document.querySelector("#timer");
 
-var questionIndex = 0;
-var correctCount = 0;
-
-var time = 20;
-var intervalId;
 
 function endQuiz() {
   clearInterval(intervalId);
