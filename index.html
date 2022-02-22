@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code-quiz</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
@@ -15,29 +16,30 @@
                 <div id="question-container" class="hide">
                   <h1 id="question">Question</h1>
                   <ul id="option-list">
-                    <button id="option" class="btn">
+                    <button id="option1" onclick= "wrong()" class="btn">
                         ans A
                     </button>
-                    <button id="optionB" class="btn">
+                    <button id="option2" onclick= "wrong()"class="btn">
                         ans B
                     </button>
-                    <button id="optionC" class="btn">
+                    <button id="option3"class="btn">
                         ans C
                     </button>
-                    <button id="optionD" class="btn">
+                    <button id="option4" onclick= "wrong()"class="btn">
                         ans D
                     </button>
                    </ul>
                 </div>
-                <div class="controls">
+                <div class="controls" >
                     <button id="start-btn">Start</button>
-                    <button id="next-btn" class ="next-btn hide">Next</button>
+                </div>
+                <div id="correct-or-wrong">
                 </div>
         </div>
     </section>
     
-    <div id="question-result"></div>
-    
+    <div id="quiz-result"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="./assets/main.js"></script>
 </body>
 </html>
